@@ -1,4 +1,5 @@
 import type { Middleware } from 'vafast'
+import { text } from 'vafast'
 
 import { defaultOptions } from "../constants/defaultOptions";
 import { DefaultContext } from "./defaultContext";
@@ -93,15 +94,11 @@ export const plugin = function rateLimitPlugin(userOptions?: Partial<Options>): 
         }
 
         // return error response with headers
-        const errorResponse = new Response(
-          typeof options.errorResponse === 'string' ? options.errorResponse : 'Too Many Requests',
-          { 
-            status: 429,
-            headers: options.headers ? builtHeaders : {}
-          }
-        );
-
-        return errorResponse;
+        const errorMessage = typeof options.errorResponse === 'string' 
+          ? options.errorResponse 
+          : 'Too Many Requests'
+        
+        return text(errorMessage, 429, options.headers ? builtHeaders : {})
       }
 
       // continue with the request, but we need to intercept the response to add headers
