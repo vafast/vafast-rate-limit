@@ -1,6 +1,6 @@
 {
   "name": "@vafast/rate-limit",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Plugin for Vafast for rate limiting",
   "type": "module",
   "license": "MIT",
