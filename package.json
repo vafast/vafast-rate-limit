@@ -43,15 +43,15 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/vafastjs/vafast-rate-limit"
+    "url": "https://github.com/vafast/vafast-rate-limit"
   },
   "author": {
     "name": "saltyAom",
     "url": "https://github.com/SaltyAom",
     "email": "saltyaom@gmail.com"
   },
-  "homepage": "https://github.com/vafastjs/vafast-rate-limit",
-  "bugs": "https://github.com/vafastjs/vafast-rate-limit/issues",
+  "homepage": "https://github.com/vafast/vafast-rate-limit",
+  "bugs": "https://github.com/vafast/vafast-rate-limit/issues",
   "dependencies": {
     "@alloc/quick-lru": "^5.2.0"
   }
