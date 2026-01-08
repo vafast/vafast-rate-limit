@@ -5,7 +5,7 @@ Lightweight rate limiter plugin for [Vafast](https://github.com/vafastjs/vafast)
 ## Installation
 
 ```bash
-bun add @vafast/rate-limit
+npm install @vafast/rate-limit
 # or
 npm install @vafast/rate-limit
 ```
