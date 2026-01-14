@@ -1,4 +1,4 @@
-import { Server, createHandler, json } from 'vafast'
+import { Server, defineRoute, defineRoutes, json } from 'vafast'
 import { rateLimit } from '../src/index'
 import { describe, it, expect, beforeEach } from 'vitest'
 
@@ -24,13 +24,15 @@ describe('Vafast Rate Limit Plugin', () => {
       headers: true
     })
     
-    const app = new Server([
-      {
-        method: 'GET',
-        path: '/',
-        handler: createHandler(() => 'Hello, Rate Limited!')
-      }
-    ])
+    const app = new Server(
+      defineRoutes([
+        defineRoute({
+          method: 'GET',
+          path: '/',
+          handler: () => 'Hello, Rate Limited!'
+        })
+      ])
+    )
 
     const wrappedFetch = (req: Request) => {
       return rateLimitMiddleware(req, () => app.fetch(req))
@@ -56,13 +58,15 @@ describe('Vafast Rate Limit Plugin', () => {
       headers: true
     })
     
-    const app = new Server([
-      {
-        method: 'GET',
-        path: '/',
-        handler: createHandler(() => 'Hello, Rate Limited!')
-      }
-    ])
+    const app = new Server(
+      defineRoutes([
+        defineRoute({
+          method: 'GET',
+          path: '/',
+          handler: () => 'Hello, Rate Limited!'
+        })
+      ])
+    )
 
     const wrappedFetch = (req: Request) => {
       return rateLimitMiddleware(req, () => app.fetch(req))
@@ -93,18 +97,20 @@ describe('Vafast Rate Limit Plugin', () => {
       skip: (req) => req.url.includes('/health')
     })
     
-    const app = new Server([
-      {
-        method: 'GET',
-        path: '/',
-        handler: createHandler(() => 'Hello, Rate Limited!')
-      },
-      {
-        method: 'GET',
-        path: '/health',
-        handler: createHandler(() => json({ status: 'OK' }))
-      }
-    ])
+    const app = new Server(
+      defineRoutes([
+        defineRoute({
+          method: 'GET',
+          path: '/',
+          handler: () => 'Hello, Rate Limited!'
+        }),
+        defineRoute({
+          method: 'GET',
+          path: '/health',
+          handler: () => json({ status: 'OK' })
+        })
+      ])
+    )
 
     const wrappedFetch = (req: Request) => {
       return rateLimitMiddleware(req, () => app.fetch(req))
@@ -161,13 +167,15 @@ describe('Vafast Rate Limit Plugin', () => {
       headers: true
     })
     
-    const app = new Server([
-      {
-        method: 'GET',
-        path: '/',
-        handler: createHandler(() => 'Hello, Custom Key!')
-      }
-    ])
+    const app = new Server(
+      defineRoutes([
+        defineRoute({
+          method: 'GET',
+          path: '/',
+          handler: () => 'Hello, Custom Key!'
+        })
+      ])
+    )
 
     const wrappedFetch = (req: Request) => {
       return rateLimitMiddleware(req, () => app.fetch(req))
@@ -197,15 +205,17 @@ describe('Vafast Rate Limit Plugin', () => {
       headers: true
     })
     
-    const app = new Server([
-      {
-        method: 'GET',
-        path: '/error',
-        handler: createHandler(() => {
-          throw new Error('Simulated error')
+    const app = new Server(
+      defineRoutes([
+        defineRoute({
+          method: 'GET',
+          path: '/error',
+          handler: () => {
+            throw new Error('Simulated error')
+          }
         })
-      }
-    ])
+      ])
+    )
 
     const wrappedFetch = (req: Request) => {
       return rateLimitMiddleware(req, () => app.fetch(req))
@@ -224,18 +234,20 @@ describe('Vafast Rate Limit Plugin', () => {
       headers: true
     })
     
-    const app = new Server([
-      {
-        method: 'GET',
-        path: '/',
-        handler: createHandler(() => json({ method: 'GET' }))
-      },
-      {
-        method: 'POST',
-        path: '/',
-        handler: createHandler(() => json({ method: 'POST' }))
-      }
-    ])
+    const app = new Server(
+      defineRoutes([
+        defineRoute({
+          method: 'GET',
+          path: '/',
+          handler: () => json({ method: 'GET' })
+        }),
+        defineRoute({
+          method: 'POST',
+          path: '/',
+          handler: () => json({ method: 'POST' })
+        })
+      ])
+    )
 
     const wrappedFetch = (req: Request) => {
       return rateLimitMiddleware(req, () => app.fetch(req))

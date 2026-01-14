@@ -1,4 +1,4 @@
-import type { Middleware } from 'vafast'
+import { defineMiddleware } from 'vafast'
 import { text } from 'vafast'
 
 import { defaultOptions } from "../constants/defaultOptions";
@@ -8,7 +8,7 @@ import { logger } from "./logger";
 
 import type { Options } from "../@types/Options";
 
-export const plugin = function rateLimitPlugin(userOptions?: Partial<Options>): Middleware {
+export const plugin = function rateLimitPlugin(userOptions?: Partial<Options>) {
   const options: Options = {
     ...defaultOptions,
     ...userOptions,
@@ -18,7 +18,7 @@ export const plugin = function rateLimitPlugin(userOptions?: Partial<Options>): 
   options.context.init(options);
 
   // 返回 vafast 中间件函数
-  return async function rateLimitMiddleware(req: Request, next: () => Promise<Response>) {
+  return defineMiddleware(async function rateLimitMiddleware(req, next) {
     let clientKey: string | undefined;
 
     /**
@@ -148,5 +148,5 @@ export const plugin = function rateLimitPlugin(userOptions?: Partial<Options>): 
       // skipped, just continue
       return next();
     }
-  };
+  });
 };
