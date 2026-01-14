@@ -1,6 +1,6 @@
 {
   "name": "@vafast/rate-limit",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Plugin for Vafast for rate limiting",
   "type": "module",
   "license": "MIT",
@@ -26,14 +26,14 @@
     "vafast": "^0.5.1",
     "vitest": "^4.0.16"
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "default": "./dist/index.js"
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.mjs"
     }
   },
   "keywords": [
